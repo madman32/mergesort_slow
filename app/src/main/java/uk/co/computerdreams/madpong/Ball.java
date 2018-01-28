@@ -104,6 +104,9 @@ public class Ball extends GameObject
             speed.y = newVelY1;
             m_speed.x = newVelX2;
             m_speed.y = newVelY2;
+
+            m_position.x += m_speed.x;
+            m_position.y += m_speed.y;
             return true;
         }
         return false;
