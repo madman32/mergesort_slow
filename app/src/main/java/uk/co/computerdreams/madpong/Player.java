@@ -1,0 +1,43 @@
+package uk.co.computerdreams.madpong;
+
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Point;
+import android.graphics.PointF;
+
+import java.util.ArrayList;
+
+/**
+ * Created by BRIAN on 28/01/2018.
+ */
+
+public class Player extends GameObject
+{
+    Player(Bitmap sprite, PointF position, Point screenSize)
+    {
+        super(sprite, position);
+        m_speed = new PointF(5,5);
+        m_screenSize = screenSize;
+    }
+
+    @Override
+    public void Update(ArrayList<GameObject> levelObjects)
+    {
+
+    }
+
+    @Override
+    public void Draw(Canvas canvas)
+    {
+        canvas.drawBitmap(m_sprite, m_position.x, m_position.y, m_paint);
+    }
+
+    @Override
+    public void CheckBallCollision(PointF position, float radius, PointF speed)
+    {
+
+    }
+
+    PointF m_speed;
+    Point m_screenSize;
+}

@@ -131,7 +131,7 @@ public class GameEngine extends SurfaceView implements Runnable
     {
         for (GameObject object : m_gameObjects)
         {
-            object.Update();
+            object.Update(m_gameObjects);
         }
     }
 

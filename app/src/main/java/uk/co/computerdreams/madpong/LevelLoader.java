@@ -30,6 +30,7 @@ public class LevelLoader
     public void LoadBalls(ArrayList<GameObject> levelObjects, Point screenSize)
     {
         levelObjects.add(new Ball(BitmapFactory.decodeResource(m_context.getResources(), R.drawable.ball1), new PointF(screenSize.x /2,screenSize.y /2), screenSize));
+        levelObjects.add(new Ball(BitmapFactory.decodeResource(m_context.getResources(), R.drawable.ball1), new PointF(0,0), screenSize));
     }
 
     public void LoadPlayers(ArrayList<GameObject> levelObjects)
