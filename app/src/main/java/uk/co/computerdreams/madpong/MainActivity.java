@@ -19,7 +19,8 @@ public class MainActivity extends Activity {
         display.getSize(size);
 
         engine = new GameEngine(this, size);
-        setContentView(R.layout.activity_main);
+
+        setContentView(engine);
     }
 
     // Start the thread in snakeEngine
