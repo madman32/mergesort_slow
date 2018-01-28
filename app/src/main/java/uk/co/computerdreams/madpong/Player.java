@@ -33,9 +33,9 @@ public class Player extends GameObject
     }
 
     @Override
-    public void CheckBallCollision(PointF position, float radius, PointF speed)
+    public boolean CheckBallCollision(PointF position, float radius, PointF speed)
     {
-
+        return false;
     }
 
     PointF m_speed;

@@ -7,6 +7,8 @@ import android.graphics.PointF;
 
 import java.util.ArrayList;
 
+import static java.lang.Math.abs;
+
 /**
  * Created by BRIAN on 28/01/2018.
  */
@@ -16,7 +18,7 @@ public class Ball extends GameObject
     Ball(Bitmap sprite, PointF position, Point screenSize)
     {
         super(sprite, position);
-        m_speed = new PointF(5,5);
+        m_speed = new PointF(10,10);
         m_screenSize = screenSize;
         m_radius = m_sprite.getWidth() / 2;
     }
@@ -34,19 +36,19 @@ public class Ball extends GameObject
     {
         if (m_position.x + m_speed.x < 0)
         {
-            m_speed.x *= -1;
+            m_speed.x = abs(m_speed.x);
         }
         if (m_position.x + m_speed.x > m_screenSize.x - m_sprite.getWidth())
         {
-            m_speed.x *= -1;
+            m_speed.x = -abs(m_speed.x);
         }
         if (m_position.y + m_speed.y < 0)
         {
-            m_speed.y *= -1;
+            m_speed.y = abs(m_speed.y);
         }
         if (m_position.y + m_speed.y > m_screenSize.y - m_sprite.getHeight())
         {
-            m_speed.y *= -1;
+            m_speed.y = -abs(m_speed.y);
         }
     }
 
@@ -56,9 +58,12 @@ public class Ball extends GameObject
         {
             if (object != this)
             {
-                object.CheckBallCollision(m_position,
+                if (object.CheckBallCollision(m_position,
                                           m_radius,
-                                          m_speed);
+                                          m_speed))
+                {
+                    break;
+                }
             }
         }
     }
@@ -70,7 +75,7 @@ public class Ball extends GameObject
     }
 
     @Override
-    public void CheckBallCollision(PointF position, float radius, PointF speed)
+    public boolean CheckBallCollision(PointF position, float radius, PointF speed)
     {
         double distance = Math.sqrt(
                 ((position.x - m_position.x) * (position.x - m_position.x)) +
@@ -99,7 +104,9 @@ public class Ball extends GameObject
             speed.y = newVelY1;
             m_speed.x = newVelX2;
             m_speed.y = newVelY2;
+            return true;
         }
+        return false;
     }
 
     private float m_radius;

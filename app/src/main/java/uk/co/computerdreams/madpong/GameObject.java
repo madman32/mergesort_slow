@@ -27,7 +27,7 @@ public abstract class GameObject
         m_paint = new Paint();
     }
 
-    public abstract void CheckBallCollision(PointF position, float radius, PointF speed);
+    public abstract boolean CheckBallCollision(PointF position, float radius, PointF speed);
 
     public abstract void Update(ArrayList<GameObject> levelObjects);
     public abstract void Draw(Canvas canvas);
