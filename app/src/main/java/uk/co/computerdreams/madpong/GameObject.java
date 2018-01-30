@@ -27,7 +27,13 @@ public abstract class GameObject
         m_paint = new Paint();
     }
 
-    public abstract boolean CheckBallCollision(PointF position, float radius, PointF speed);
+    /*
+    * Ball rectangle intersection
+    * DeltaX = CircleX - Max(RectX, Min(CircleX, RectX + RectWidth));
+    * DeltaY = CircleY - Max(RectY, Min(CircleY, RectY + RectHeight));
+    * return (DeltaX * DeltaX + DeltaY * DeltaY) < (CircleRadius * CircleRadius);
+    */
+    public abstract boolean CheckBallCollision(Ball ball);
 
     public abstract void Update(ArrayList<GameObject> levelObjects);
     public abstract void Draw(Canvas canvas);

@@ -33,11 +33,12 @@ public class Player extends GameObject
     }
 
     @Override
-    public boolean CheckBallCollision(PointF position, float radius, PointF speed)
+    public boolean CheckBallCollision(Ball ball)
     {
+
         return false;
     }
 
-    PointF m_speed;
-    Point m_screenSize;
+    private PointF m_speed;
+    private Point m_screenSize;
 }

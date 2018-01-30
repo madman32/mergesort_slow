@@ -15,17 +15,21 @@ import java.util.ArrayList;
 public class LevelLoader
 {
     private Context m_context;
+    ArrayList<GameObject> m_levelObjects;
     LevelLoader(Context context)
     {
         m_context = context;
+        m_levelObjects = new  ArrayList<>();
     }
+
+
+    // @Todo define method for loading objects based on some pre-stored info?
     ArrayList<GameObject> LoadLevel(int level, Point screenSize)
     {
-        ArrayList<GameObject> levelObjects = new  ArrayList<>();
-        LoadBalls(levelObjects, screenSize);
-        LoadPlayers(levelObjects, screenSize);
-        LoadObjects(levelObjects);
-        return levelObjects;
+        LoadBalls(m_levelObjects, screenSize);
+        LoadPlayers(m_levelObjects, screenSize);
+        LoadObjects(m_levelObjects);
+        return m_levelObjects;
     }
 
     void LoadBalls(ArrayList<GameObject> levelObjects, Point screenSize)
