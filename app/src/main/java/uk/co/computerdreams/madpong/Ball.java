@@ -17,11 +17,9 @@ public class Ball extends GameObject
 {
     Ball(Bitmap sprite, PointF position, Point screenSize)
     {
-        super(sprite, position);
-        m_speed = new PointF(10,10);
+        super(sprite, position, new Vector2d(10,10), 5);
         m_screenSize = screenSize;
         m_radius = m_sprite.getWidth() / 2;
-        m_collided = false;
     }
 
     @Override
@@ -61,7 +59,7 @@ public class Ball extends GameObject
             {
                 if (object.CheckBallCollision(this))
                 {
-                    break;
+                    Collide(this, object);
                 }
             }
         }
@@ -74,51 +72,19 @@ public class Ball extends GameObject
     }
 
     @Override
-    //public boolean CheckBallCollision(PointF position, float radius, PointF speed)
     public boolean CheckBallCollision(Ball ball)
     {
         double distance = Math.sqrt(
                 ((ball.m_position.x - m_position.x) * (ball.m_position.x - m_position.x)) +
                 ((ball.m_position.y - m_position.y) * (ball.m_position.y - m_position.y)));
         // Two balls colliding
-        if (distance < ball.m_radius + m_radius && !ball.m_collided)
+        if (distance < (ball.m_radius + m_radius))
         {
-            //balls have collided
-            // Collision point
-            /*double collisionPointX =
-            ((position.x * m_radius) + (m_position.x * radius))
-                    / (radius + m_radius);
-
-            double collisionPointY =
-                    ((position.y * m_radius) + (m_position.y * radius))
-                            / (radius + m_radius);*/
-
-            float ball1Mass = ball.m_radius / MASS_DIVISOR;
-            float ball2Mass = m_radius  / MASS_DIVISOR;
-            float newVelX1 = (ball.m_speed.x * (ball1Mass - ball2Mass) + (2 * ball2Mass * m_speed.x)) / (ball1Mass + ball2Mass);
-            float newVelY1 = (ball.m_speed.y * (ball1Mass - ball2Mass) + (2 * ball2Mass * m_speed.y)) / (ball1Mass + ball2Mass);
-            float newVelX2 = (m_speed.x * (ball2Mass - ball1Mass) + (2 * ball1Mass * ball.m_speed.x)) / (ball1Mass + ball2Mass);
-            float newVelY2 = (m_speed.y * (ball2Mass - ball1Mass) + (2 * ball1Mass * ball.m_speed.y)) / (ball1Mass + ball2Mass);
-
-            ball.m_speed.x = newVelX1;
-            ball.m_speed.y = newVelY1;
-            m_speed.x = newVelX2;
-            m_speed.y = newVelY2;
-
-            m_collided = true;
             return true;
-        }
-        // Checks to make it a single for collision per update
-        else if(m_collided)
-        {
-            m_collided = false;
         }
         return false;
     }
 
-    private boolean m_collided;
-    private float m_radius;
-    public PointF m_speed;
+    public float m_radius;
     private Point m_screenSize;
-    private float MASS_DIVISOR = 5;
 }
