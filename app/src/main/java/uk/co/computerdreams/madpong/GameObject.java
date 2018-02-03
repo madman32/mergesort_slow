@@ -39,7 +39,7 @@ public abstract class GameObject {
 
     static void Collide(GameObject obj1, GameObject obj2)
     {
-        Vector2d normal = new Vector2d(1, 1);
+        Vector2d normal = new Vector2d(obj1.m_position.x - obj2.m_position.x, obj1.m_position.y - obj2.m_position.y).Normalise();
         // Calculate relative velocity
         Vector2d rv = obj1.m_speed.Subtract(obj2.m_speed);
 

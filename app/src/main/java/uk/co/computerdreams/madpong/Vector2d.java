@@ -1,4 +1,5 @@
 package uk.co.computerdreams.madpong;
+import java.lang.Math;
 
 /**
  * Created by BRIAN on 03/02/2018.
@@ -9,12 +10,14 @@ public class Vector2d
     // Members
     public double x;
     public double y;
+    private double magnitude;
 
     // Constructors
     public Vector2d()
     {
         this.x = 0.0f;
         this.y = 0.0f;
+        this.magnitude = 0.0f;
     }
 
     public static Vector2d Of(double x, double y)
@@ -26,6 +29,7 @@ public class Vector2d
     {
         this.x = x;
         this.y = y;
+        this.magnitude = Math.sqrt( (x * x) + (y * y) );
     }
 
     // Compare two vectors
@@ -53,8 +57,14 @@ public class Vector2d
     {
         return (other.x * x) + (other.y * y);
     }
+
     public Vector2d InvertSign()
     {
         return Of(-x, -y);
+    }
+
+    public Vector2d Normalise()
+    {
+        return Of( (x / magnitude ), (y / magnitude) ); // Can cause imprecision in repeated calculations - no guarantee to be exactly 1 magnitude
     }
 }
